@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bonabola · Reporte Meta Ads · Septiembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a;
+  --surface:#111827;
+  --surface-2:#0f1626;
+  --border:rgba(255,255,255,0.07);
+  --accent:#00d4aa;
+  --accent2:#ff6b35;
+  --accent3:#7c3aed;
+  --text:#e8eaf0;
+  --muted:#6b7a9a;
+  --good:#10b981;
+  --warn:#f59e0b;
+  --bad:#ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:clamp(14px,1.5vw,16px);line-height:1.6;}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(10,14,26,0.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:12px clamp(16px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.topbar-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(14px,1.8vw,18px);letter-spacing:0.15em;color:var(--text);}
+.topbar-badge{background:rgba(0,212,170,0.12);border:1px solid rgba(0,212,170,0.3);color:var(--accent);font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;white-space:nowrap;letter-spacing:0.05em;}
+
+.header{position:relative;padding:clamp(48px,8vw,100px) clamp(16px,6vw,80px) clamp(40px,6vw,72px);overflow:hidden;border-bottom:1px solid var(--border);}
+.header::before{content:'';position:absolute;top:-120px;right:-80px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,170,0.08) 0%,transparent 70%);pointer-events:none;}
+.header::after{content:'';position:absolute;bottom:-80px;left:60px;width:400px;height:400px;background:radial-gradient(circle,rgba(124,58,237,0.06) 0%,transparent 70%);pointer-events:none;}
+.header-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:16px;}
+.header-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,6vw,72px);line-height:1.05;margin-bottom:16px;}
+.header-title span{color:var(--accent);}
+.header-sub{font-size:clamp(14px,1.8vw,18px);color:var(--muted);max-width:680px;margin-bottom:40px;}
+.header-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;max-width:760px;}
+.header-meta-item{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:14px 18px;}
+.header-meta-label{font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:4px;}
+.header-meta-value{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--text);}
+
+.section{padding:clamp(40px,6vw,72px) clamp(16px,6vw,80px);}
+.section+.section{border-top:1px solid var(--border);}
+.section-number{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.section-heading{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,3.5vw,40px);line-height:1.1;margin-bottom:clamp(24px,4vw,48px);}
+.subheading{font-family:'Syne',sans-serif;font-size:18px;margin-bottom:20px;color:var(--muted);font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-top:32px;}
+.subheading:first-child{margin-top:0;}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:32px;}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent-color,var(--accent));border-radius:12px;padding:20px 22px;position:relative;}
+.kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:8px;}
+.kpi-value{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,3vw,32px);line-height:1;margin-bottom:8px;}
+.kpi-sub{font-size:12px;color:var(--muted);}
+.kpi-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;margin-top:6px;}
+.badge-good{background:rgba(16,185,129,0.15);color:var(--good);}
+.badge-warn{background:rgba(245,158,11,0.15);color:var(--warn);}
+.badge-bad{background:rgba(239,68,68,0.15);color:var(--bad);}
+.badge-info{background:rgba(0,212,170,0.12);color:var(--accent);}
+
+.alert{border-radius:10px;padding:14px 18px;font-size:13px;margin-bottom:12px;border-left:3px solid;}
+.alert-good{background:rgba(16,185,129,0.08);border-color:var(--good);color:#a7f3d0;}
+.alert-warn{background:rgba(245,158,11,0.08);border-color:var(--warn);color:#fde68a;}
+.alert-info{background:rgba(0,212,170,0.08);border-color:var(--accent);color:#a7f3d0;}
+.alert-bad{background:rgba(239,68,68,0.08);border-color:var(--bad);color:#fecaca;}
+.alert strong{font-weight:700;}
+
+.insight{background:linear-gradient(135deg,rgba(0,212,170,0.06),rgba(124,58,237,0.04));border:1px solid rgba(0,212,170,0.2);border-radius:12px;padding:18px 22px;margin-top:20px;font-size:14px;line-height:1.65;}
+.insight strong{color:var(--accent);font-weight:700;}
+
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead{background:rgba(255,255,255,0.04);}
+th{padding:12px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-weight:700;white-space:nowrap;}
+td{padding:12px 16px;border-top:1px solid var(--border);vertical-align:middle;}
+tr:hover td{background:rgba(255,255,255,0.025);}
+.num{font-family:'Syne',sans-serif;font-weight:700;}
+.num-good{color:var(--good);}
+.num-warn{color:var(--warn);}
+.num-bad{color:var(--bad);}
+.num-accent{color:var(--accent);}
+.num-up{color:var(--good);}
+.num-down{color:var(--bad);}
+
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:0.05em;}
+.tag-broad{background:rgba(0,212,170,0.15);color:var(--accent);}
+.tag-padel{background:rgba(124,58,237,0.15);color:#a78bfa;}
+.tag-mofu{background:rgba(255,107,53,0.15);color:var(--accent2);}
+.tag-tofu{background:rgba(0,212,170,0.15);color:var(--accent);}
+.tag-stories{background:rgba(255,107,53,0.15);color:var(--accent2);}
+.tag-reels{background:rgba(124,58,237,0.15);color:#a78bfa;}
+.tag-feed{background:rgba(16,185,129,0.15);color:var(--good);}
+.tag-male{background:rgba(59,130,246,0.15);color:#93c5fd;}
+.tag-female{background:rgba(236,72,153,0.15);color:#f9a8d4;}
+.tag-paused{background:rgba(245,158,11,0.15);color:var(--warn);}
+
+.bar-section{margin-bottom:32px;}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.bar-label{font-size:12px;color:var(--muted);width:clamp(80px,14vw,140px);text-align:right;flex-shrink:0;}
+.bar-track{flex:1;background:rgba(255,255,255,0.06);border-radius:99px;height:28px;position:relative;overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;display:flex;align-items:center;padding:0 12px;font-size:11px;font-weight:700;color:var(--bg);}
+
+.ad-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-bottom:24px;}
+.ad-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;}
+.ad-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin:8px 0 16px;line-height:1.3;min-height:36px;}
+.ad-rank-badge{margin-bottom:8px;}
+.ad-rank{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;}
+.rank-top{background:rgba(0,212,170,0.15);color:var(--accent);}
+.rank-mid{background:rgba(245,158,11,0.15);color:var(--warn);}
+.rank-bot{background:rgba(239,68,68,0.1);color:var(--bad);}
+.ad-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+.ad-metric{background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;}
+.ad-metric-val{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;line-height:1.1;}
+.ad-metric-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-top:3px;font-weight:600;}
+
+.video-funnel{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px;}
+.funnel-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
+.funnel-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.funnel-label{width:90px;font-size:12px;color:var(--muted);flex-shrink:0;}
+.funnel-bar{flex:1;height:34px;background:rgba(255,255,255,0.05);border-radius:8px;overflow:hidden;position:relative;}
+.funnel-fill{height:100%;display:flex;align-items:center;padding:0 14px;font-size:12px;font-weight:700;color:var(--bg);border-radius:8px;}
+.funnel-pct{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;width:60px;text-align:right;color:var(--text);}
+
+.placement-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px;}
+.placement-name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:12px;}
+.placement-metric{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--border);}
+.placement-metric:last-child{border-bottom:none;}
+.placement-metric-label{color:var(--muted);}
+.placement-metric-value{font-family:'Syne',sans-serif;font-weight:700;}
+
+.persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+.persona-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;position:relative;border-top:3px solid var(--accent-color,var(--accent));}
+.persona-tag{font-family:'Syne',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent-color,var(--accent));margin-bottom:6px;}
+.persona-title{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:6px;}
+.persona-sub{font-size:12px;color:var(--muted);margin-bottom:16px;font-style:italic;}
+.persona-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;}
+.persona-stat{background:rgba(255,255,255,0.03);border-radius:8px;padding:10px 12px;}
+.persona-stat-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:3px;font-weight:600;}
+.persona-stat-val{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;}
+.persona-desc{font-size:12px;color:var(--muted);line-height:1.55;}
+
+.aes-card{background:linear-gradient(135deg,rgba(0,212,170,0.05),rgba(124,58,237,0.04));border:1px solid var(--border);border-radius:12px;padding:20px;}
+.aes-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;padding:10px 12px;background:rgba(255,255,255,0.025);border-radius:8px;}
+.aes-rank{font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--accent);width:32px;flex-shrink:0;}
+.aes-seg{flex:1;font-size:13px;font-weight:600;}
+.aes-bar{flex:2;height:8px;background:rgba(255,255,255,0.06);border-radius:99px;overflow:hidden;position:relative;}
+.aes-fill{height:100%;background:linear-gradient(90deg,var(--accent),#7c3aed);border-radius:99px;}
+.aes-baseline{position:absolute;top:-2px;bottom:-2px;width:2px;background:rgba(255,255,255,0.4);left:0;}
+.aes-score{font-family:'Syne',sans-serif;font-weight:800;font-size:14px;width:50px;text-align:right;}
+
+.aes-formula{background:rgba(255,255,255,0.03);border:1px dashed var(--border);border-radius:10px;padding:18px 22px;font-family:'DM Sans',monospace;font-size:13px;line-height:1.8;margin-bottom:24px;}
+.aes-formula code{background:rgba(0,212,170,0.1);color:var(--accent);padding:2px 8px;border-radius:4px;font-family:'DM Sans',sans-serif;font-weight:600;}
+
+.step-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid;border-radius:12px;padding:20px 24px;margin-bottom:14px;}
+.step-card.urgent{border-left-color:var(--bad);}
+.step-card.important{border-left-color:var(--warn);}
+.step-card.improve{border-left-color:var(--accent3);}
+.step-priority{display:inline-block;font-size:10px;font-weight:800;padding:4px 12px;border-radius:99px;letter-spacing:0.08em;margin-bottom:10px;}
+.urgent .step-priority{background:rgba(239,68,68,0.15);color:var(--bad);}
+.important .step-priority{background:rgba(245,158,11,0.15);color:var(--warn);}
+.improve .step-priority{background:rgba(124,58,237,0.15);color:#a78bfa;}
+.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px;}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.65;}
+
+.conclusion-block p{margin-bottom:18px;font-size:15px;line-height:1.75;color:var(--text);}
+.conclusion-block p strong{color:var(--accent);}
+
+.footer{padding:48px clamp(16px,6vw,80px);background:rgba(255,255,255,0.02);border-top:1px solid var(--border);text-align:center;}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:0.2em;font-size:14px;color:var(--muted);margin-bottom:8px;}
+.footer-meta{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.footer-contact{font-size:12px;color:var(--muted);line-height:1.7;}
+.footer-contact a{color:var(--accent);text-decoration:none;}
+.footer-contact a:hover{text-decoration:underline;}
+
+@media (max-width:600px){
+  .ad-metrics{grid-template-columns:repeat(2,1fr);}
+  .ad-metric-val{font-size:13px;}
+  .bar-label{width:60px;font-size:11px;}
+  .funnel-label{width:70px;font-size:11px;}
+}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-logo">B O N A B O L A</div><div class="topbar-badge">Navy Marketing · Reporte de rendimiento</div></div>
+<div class="header">
+  <div class="header-eyebrow">Meta Ads · Septiembre 2026</div>
+  <h1 class="header-title">Meta Ads <span>Septiembre 2026</span></h1>
+  <p class="header-sub">El mes del <strong>giro estratégico</strong>: la cuenta deja de empujar venta directa y se vuelca en <strong>captación de leads</strong>. La inversión se duplica y entran <strong>843 leads a €1,05</strong>. Arranca la nueva colección, se abre el mercado inglés y la web nueva empieza a devolver datos de carrito y checkout.</p>
+  <div class="header-meta">
+    <div class="header-meta-item"><div class="header-meta-label">Periodo</div><div class="header-meta-value">01 – 30 Sep 2026</div></div>
+    <div class="header-meta-item"><div class="header-meta-label">Mercados</div><div class="header-meta-value">ES 🇪🇸 · US 🇺🇸 · EU 🇪🇺</div></div>
+    <div class="header-meta-item"><div class="header-meta-label">Moneda</div><div class="header-meta-value">EUR €</div></div>
+    <div class="header-meta-item"><div class="header-meta-label">Campañas con gasto</div><div class="header-meta-value">10</div></div>
+  </div>
+</div>
+<div class="section" id="s1"><div class="section-number">01</div><h2 class="section-heading">Resumen Ejecutivo</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-label">Inversión total</div><div class="kpi-value">€1,200.23</div><div class="kpi-sub">Leads €886 (74%) · Perfil €179 (15%) · Tienda €135 (11%)</div><span class="kpi-badge badge-good">▲ +115.4% vs agosto</span></div>
+    <div class="kpi-card" style="--accent-color:var(--good)"><div class="kpi-label">Leads captados</div><div class="kpi-value">843</div><div class="kpi-sub">4 campañas de captación · el objetivo del mes</div><span class="kpi-badge badge-good">▲ nuevo (0 en agosto)</span></div>
+    <div class="kpi-card" style="--accent-color:var(--good)"><div class="kpi-label">Coste por lead (CPL)</div><div class="kpi-value">€1.05</div><div class="kpi-sub">Recomendador €0,43 · Sale privada €1,49 · Inglés €1,83</div><span class="kpi-badge badge-good">✓ Métrica principal</span></div>
+    <div class="kpi-card"><div class="kpi-label">Eventos de tienda</div><div class="kpi-value">5</div><div class="kpi-sub">3 carritos + 2 checkouts iniciados · todos en la nueva colección</div><span class="kpi-badge badge-info">Volumen aún pequeño</span></div>
+    <div class="kpi-card"><div class="kpi-label">Valor de carrito registrado</div><div class="kpi-value">€114.70</div><div class="kpi-sub">3 carritos registrados en la web nueva</div><span class="kpi-badge badge-info">Nueva señal</span></div>
+    <div class="kpi-card"><div class="kpi-label">Valor de checkout iniciado</div><div class="kpi-value">€124.60</div><div class="kpi-sub">2 checkouts iniciados en la web nueva</div><span class="kpi-badge badge-info">Nueva señal</span></div>
+    <div class="kpi-card"><div class="kpi-label">Visitas al perfil IG</div><div class="kpi-value">6,883</div><div class="kpi-sub">Calentamiento · con inversión casi idéntica</div><span class="kpi-badge badge-bad">▼ -29.3% vs agosto</span></div>
+    <div class="kpi-card"><div class="kpi-label">Coste por visita al perfil</div><div class="kpi-value">€0.0260</div><div class="kpi-sub">Pierde el mínimo histórico de agosto (€0,0189)</div><span class="kpi-badge badge-bad">▲ +37.6% vs agosto</span></div>
+    <div class="kpi-card"><div class="kpi-label">Impresiones</div><div class="kpi-value">353,116</div><div class="kpi-sub">Alcance combinado ≈ 225.800</div><span class="kpi-badge badge-good">▲ +23.4% vs agosto</span></div>
+    <div class="kpi-card"><div class="kpi-label">CPM medio</div><div class="kpi-value">€3.40</div><div class="kpi-sub">Sube por el mix de leads y Facebook</div><span class="kpi-badge badge-bad">▲ +74.4% vs agosto</span></div>
+    <div class="kpi-card"><div class="kpi-label">Añadidos al carrito</div><div class="kpi-value">3</div><div class="kpi-sub">Todos en MOFU Nueva Colección</div><span class="kpi-badge badge-bad">▼ -57.1% vs agosto</span></div>
+    <div class="kpi-card"><div class="kpi-label">Seguidores IG ganados</div><div class="kpi-value">38</div><div class="kpi-sub">Atribuidos a las campañas del mes</div><span class="kpi-badge badge-info">Dato nuevo</span></div>
+  </div>
+  <div class="alert alert-good">✅ <strong>Lo más importante del mes: la cuenta cambia de objetivo y funciona.</strong> Septiembre abandona la venta directa como foco y se vuelca en captación: <strong>€886 (74% del presupuesto) generan 843 leads a €1,05 de media</strong>. Dentro de ese bloque hay una diferencia enorme que marca el camino: el <strong>recomendador de palas capta a €0,43 por lead</strong>, <strong>3,5 veces más barato</strong> que la sale privada (€1,49). Además se abre el <strong>mercado inglés</strong> (73 leads) y la nueva colección entra en campaña el 22/09.</div>
+  <div class="alert alert-good">🆕 <strong>La web nueva ya genera actividad de compra.</strong> La nueva colección produce <strong>3 carritos con un valor de €114,70 y 2 checkouts iniciados por valor de €124,60</strong> en apenas ocho días de campaña y con solo €63 de inversión. Es la primera señal de que el tráfico que llega a la tienda nueva avanza hacia la compra.</div>
+  <div class="alert alert-warn">⚠️ <strong>Lo que vigilar:</strong> la <strong>inversión se ha duplicado (+115%)</strong> y el <strong>CPM sube un 74%</strong> (€1,95 → €3,40) al entrar Facebook y formatos de leads en el mix. El <strong>calentamiento pierde eficiencia</strong>: el coste por visita al perfil sube un 38% (€0,0189 → €0,0260) con casi el mismo gasto. Y la <strong>tienda queda reducida al 11% del presupuesto</strong> (€135): con la nueva colección recién lanzada y la web nueva lista, es poco dinero para saber si convierten.</div>
+</div>
+<div class="section" id="s2"><div class="section-number">02</div><h2 class="section-heading">Análisis por Destino / Objetivo</h2>
+  <p style="color:var(--muted);margin-bottom:24px;max-width:820px;">Septiembre reordena por completo el reparto respecto a agosto. El destino dominante ya no es la tienda sino el <strong style="color:var(--text)">formulario de captación de leads</strong>, que absorbe tres de cada cuatro euros. El <strong style="color:var(--text)">perfil de Instagram</strong> mantiene su presupuesto y la <strong style="color:var(--text)">tienda online</strong> queda como destino minoritario.</p>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent-color:var(--good)"><div class="kpi-label">Leads · Formularios</div><div class="kpi-value">€886.36</div><div class="kpi-sub">843 leads · CPL €1.05 · 4 campañas</div><span class="kpi-badge badge-good">74% del gasto</span></div>
+    <div class="kpi-card"><div class="kpi-label">Perfil de Instagram</div><div class="kpi-value">€178.83</div><div class="kpi-sub">6,883 visitas al perfil · €0.0260 cada una</div><span class="kpi-badge badge-info">15% del gasto</span></div>
+    <div class="kpi-card" style="--accent-color:var(--accent2)"><div class="kpi-label">Tienda online</div><div class="kpi-value">€135.04</div><div class="kpi-sub">3 carritos · 2 checkouts iniciados · €114,70 en carrito</div><span class="kpi-badge badge-warn">11% · muy poco peso</span></div>
+  </div>
+  <div class="bar-section">
+    <div class="bar-row"><div class="bar-label">Leads</div><div class="bar-track"><div class="bar-fill" style="width:74%;background:var(--good);">€886 · 74%</div></div></div>
+    <div class="bar-row"><div class="bar-label">Perfil IG</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:var(--accent);">€179 · 15%</div></div></div>
+    <div class="bar-row"><div class="bar-label">Tienda</div><div class="bar-track"><div class="bar-fill" style="width:11%;background:var(--accent2);">€135 · 11%</div></div></div>
+  </div>
+  <div class="insight">Lectura: el cambio tiene sentido a la vista del historial — el único canal con rendimiento demostrable y barato era precisamente el de leads, mientras la venta directa venía costando mucho. Pasar el presupuesto ahí es coherente. <strong>El matiz es que ahora el éxito depende de lo que ocurra después del lead</strong>: estos 843 contactos solo valen si el flujo de email los convierte, y eso ocurre fuera de Meta. <strong>Pendiente de confirmar con Klaviyo</strong> cuántos de estos leads acaban comprando, que es lo que dirá si el CPL de €1,05 es bueno o caro.</div>
+</div>
+<div class="section" id="s3"><div class="section-number">03</div><h2 class="section-heading">Análisis por Campaña</h2>
+  <p style="color:var(--muted);margin-bottom:20px;max-width:820px;">Con el cambio de objetivo, la comparación directa con agosto deja de ser posible en la mayoría de campañas: <strong style="color:var(--text)">seis de las diez campañas con gasto son nuevas</strong> y persiguen un resultado distinto (lead en lugar de visita o carrito). Se agrupan por bloque.</p>
+  <div class="subheading">3a · Bloque LEADS — el 74% de la inversión</div>
+  <div class="table-wrap"><table><thead><tr><th>Campaña</th><th>Inversión</th><th>Leads</th><th>CPL</th><th>Impresiones</th><th>CTR</th><th>CPM</th><th>Lectura</th></tr></thead><tbody>
+  <tr style="background:rgba(52,211,153,0.07)"><td><strong>BNBL_LEAD_RECOMENDADOR</strong> 🏆</td><td class="num">€157.54</td><td class="num">370</td><td class="num num-up">€0.426</td><td class="num">47,494</td><td class="num">3.03%</td><td class="num">€3.32</td><td style="color:var(--muted);font-size:12px;">El más eficiente con diferencia</td></tr>
+  <tr><td><strong>BNBL_LEAD_LEAD_RBJP_0926</strong> (sale privada)</td><td class="num">€595.04</td><td class="num">400</td><td class="num">€1.488</td><td class="num">158,313</td><td class="num">1.37%</td><td class="num">€3.76</td><td style="color:var(--muted);font-size:12px;">Mayor volumen, 3,5× más caro por lead</td></tr>
+  <tr><td><strong>(inglés) lead recomendador</strong></td><td class="num">€72,79</td><td class="num">38</td><td class="num">€1,916</td><td class="num">3,842</td><td class="num">3,64%</td><td class="num">€18,95</td><td style="color:var(--muted);font-size:12px;">CPM altísimo · mercado nuevo</td></tr>
+  <tr><td><strong>BNBL_LEAD_MERCADOINGLES</strong></td><td class="num">€60,99</td><td class="num">35</td><td class="num">€1,743</td><td class="num">8,494</td><td class="num">2,47%</td><td class="num">€7,18</td><td style="color:var(--muted);font-size:12px;">Apertura mercado inglés</td></tr>
+  <tr style="border-top:2px solid var(--border)"><td><strong>TOTAL LEADS</strong></td><td class="num"><strong>€886.36</strong></td><td class="num"><strong>843</strong></td><td class="num"><strong>€1.051</strong></td><td class="num">218,143</td><td class="num">—</td><td class="num">—</td><td style="color:var(--muted);font-size:12px;">—</td></tr>
+  </tbody></table></div>
+  <div class="insight"><strong>El dato más accionable del mes:</strong> el <strong>recomendador de palas capta leads a €0,426</strong> frente a los <strong>€1,488 de la sale privada</strong> — una diferencia de <strong>3,5×</strong>. Con el mismo presupuesto que se destinó a la sale privada (€595), el recomendador habría generado del orden de 1.400 leads en lugar de 400, si mantuviera su eficiencia a ese volumen (<em>hipótesis: escalar siempre encarece algo el CPL</em>). También rinde mejor en CTR (3,03% vs 1,37%). El mercado inglés arranca caro (CPL €1,83 y un CPM de €18,95 en la campaña de recomendador en inglés), lo esperable en una audiencia nueva sin histórico.</div>
+  <div class="subheading">3b · Perfil y tienda — Δ vs agosto</div>
+  <div class="table-wrap"><table><thead><tr><th>Métrica</th><th>Agosto</th><th>Septiembre</th><th>Δ</th><th>Lectura</th></tr></thead><tbody>
+  <tr><td colspan="5" style="background:rgba(0,212,170,0.06);"><span class="tag tag-tofu">PERFIL · CALENTAMIENTO</span> &nbsp;Única campaña comparable mes a mes</td></tr>
+  <tr><td>Inversión</td><td class="num">€184,24</td><td class="num">€178,83</td><td class="num">▼ −2,9%</td><td style="color:var(--muted);font-size:12px;">Prácticamente igual</td></tr>
+  <tr><td>Impresiones</td><td class="num">161,708</td><td class="num">108,894</td><td class="num num-down">▼ −32,7%</td><td style="color:var(--muted);font-size:12px;">Menos volumen por el mismo dinero</td></tr>
+  <tr><td>Visitas al perfil</td><td class="num">9,729</td><td class="num">6,883</td><td class="num num-down">▼ −29,3%</td><td style="color:var(--muted);font-size:12px;">Caída notable</td></tr>
+  <tr><td>Coste por visita</td><td class="num">€0,0189</td><td class="num">€0,0260</td><td class="num num-down">▲ +37,6%</td><td style="color:var(--muted);font-size:12px;">⚠ Se encarece</td></tr>
+  <tr><td>CPM</td><td class="num">€1,14</td><td class="num">€1,64</td><td class="num num-down">▲ +43,9%</td><td style="color:var(--muted);font-size:12px;">Sube el coste de alcance</td></tr>
+  <tr><td>CTR enlace</td><td class="num">6,02%</td><td class="num">6,40%</td><td class="num num-up">▲ +0,38 pp</td><td style="color:var(--muted);font-size:12px;">Mejora el clic</td></tr>
+  <tr><td>Frecuencia</td><td class="num">1,50×</td><td class="num">1,36×</td><td class="num num-up">▼ −9,3%</td><td style="color:var(--muted);font-size:12px;">✓ Zona óptima</td></tr>
+  <tr><td colspan="5" style="background:rgba(255,107,53,0.06);"><span class="tag tag-mofu">TIENDA</span> &nbsp;Nueva colección (desde 22/09) y resto de campañas</td></tr>
+  <tr><td><strong>MOFU_NEWCOLLECTION</strong> · Inversión</td><td class="num">—</td><td class="num">€63,32</td><td><span class="num num-accent">Nuevo</span></td><td style="color:var(--muted);font-size:12px;">Lanzada con la nueva colección</td></tr>
+  <tr><td><strong>MOFU_NEWCOLLECTION</strong> · Carritos</td><td class="num">—</td><td class="num">3</td><td><span class="num num-accent">Nuevo</span></td><td style="color:var(--muted);font-size:12px;">Valor registrado €114,70</td></tr>
+  <tr><td><strong>MOFU_NEWCOLLECTION</strong> · Checkouts</td><td class="num">—</td><td class="num">1</td><td><span class="num num-accent">Nuevo</span></td><td style="color:var(--muted);font-size:12px;">Valor registrado €124,60 (con el otro)</td></tr>
+  <tr><td><strong>REBAJAS10_BROAD</strong> · Inversión</td><td class="num">—</td><td class="num">€43,75</td><td><span class="num num-accent">Nuevo</span></td><td style="color:var(--muted);font-size:12px;">1 checkout · sin leads en Meta</td></tr>
+  <tr><td><strong>TOFU + MOFU + MOFU Europa</strong> (antiguas)</td><td class="num">€372,94</td><td class="num">€27,97</td><td class="num num-down">▼ −92,5%</td><td style="color:var(--muted);font-size:12px;">Prácticamente apagadas</td></tr>
+  </tbody></table></div>
+  <div class="insight">El calentamiento es la única campaña comparable, y el saldo es mixto: <strong>mejora el CTR y la frecuencia pero pierde un 38% de eficiencia en coste por visita</strong>. Al mantener el gasto y perder un tercio de las impresiones, lo más probable es que haya competido por inventario con el resto de campañas del mes (<em>hipótesis</em>, no verificable con estos datos). En tienda, la <strong>nueva colección arranca con señal</strong>: con solo €63 genera 3 carritos y 1 checkout, los únicos eventos de compra de toda la cuenta. <strong>REBAJAS10 no registra leads en Meta pese a llamarse campaña de lead</strong> — lleva a la web, así que los registros estarían en la tienda o en Klaviyo; <strong>pendiente de confirmar ahí</strong>.</div>
+</div>
+<div class="section" id="s4"><div class="section-number">04</div><h2 class="section-heading">Análisis por País</h2>
+  <p style="color:var(--muted);margin-bottom:20px;max-width:780px;">La apertura al mercado inglés mueve el reparto por primera vez desde junio: <strong style="color:var(--text)">Estados Unidos vuelve a aparecer</strong> con peso propio.</p>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-label">🇪🇸 España</div><div class="kpi-value">€1.024,53</div><div class="kpi-sub">334.744 imp · 770 leads · CTR 3,23%</div><span class="kpi-badge badge-good">85,4% del gasto</span></div>
+    <div class="kpi-card" style="--accent-color:var(--accent3)"><div class="kpi-label">🇺🇸 Estados Unidos</div><div class="kpi-value">€77,26</div><div class="kpi-sub">3.998 imp · 38 leads · CTR 3,63% · CPL ≈ €2,03</div><span class="kpi-badge badge-info">6,4% · reapertura</span></div>
+    <div class="kpi-card" style="--accent-color:var(--accent2)"><div class="kpi-label">🇪🇺 Resto de Europa</div><div class="kpi-value">€98,44</div><div class="kpi-sub">43 países · ~35 leads · FR €15 · IT €14 · BE €10 · HU €10…</div><span class="kpi-badge badge-warn">8,2% · muy disperso</span></div>
+  </div>
+  <div class="alert alert-info">ℹ️ <strong>España concentra el 85% del gasto y el 91% de los leads</strong>, con el mejor CTR del bloque principal. <strong>Estados Unidos vuelve a la cuenta</strong> tras cerrarse en junio, esta vez con objetivo de lead en lugar de venta: 38 leads con un CTR del 3,63%, mejor que el español, aunque a un coste por lead superior (≈€2,03 frente a €1,05 global). El <strong>resto de Europa sigue repartido entre 43 países</strong> con importes pequeños — el patrón que arrastramos desde junio —, si bien esta vez el gasto es consecuencia de campañas en inglés dirigidas a varios mercados, no de una segmentación olvidada. Conviene decidir si el mercado anglosajón se concentra en 2-3 países o se mantiene abierto.</div>
+</div>
+<div class="section" id="s5"><div class="section-number">05</div><h2 class="section-heading">Análisis de Audiencias</h2>
+<div class="alert alert-info">ℹ️ <strong>Qué es esta sección y qué cambia este mes:</strong> reparto de la inversión por <strong>género, edad y ubicación</strong> con su eficiencia asociada. Como el objetivo del mes es el lead, la base de cálculo son las <strong>cuatro campañas de captación</strong> y la métrica de eficiencia es el <strong>coste por lead</strong>, no el coste por visita a la web como en meses anteriores. Base: <strong>€886,36 · 843 leads · CPL medio €1,051</strong>. <em>Las campañas de tienda (€135) tienen demasiado poco volumen para un desglose demográfico fiable.</em></div>
+<div class="subheading">5a · Por género (campañas de leads)</div><div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-label">Hombre</div><div class="kpi-value">€595.48</div><div class="kpi-sub">601 leads · CPL €0.991 · CTR 1.94%</div><span class="kpi-badge badge-info">67.2% del gasto</span></div>
+<div class="kpi-card"><div class="kpi-label">Mujer</div><div class="kpi-value">€285.03</div><div class="kpi-sub">234 leads · CPL €1.218 · CTR 1.54%</div><span class="kpi-badge badge-info">32.2% del gasto</span></div>
+<div class="kpi-card"><div class="kpi-label">No declarado</div><div class="kpi-value">€5.85</div><div class="kpi-sub">8 leads · CPL €0.731 · CTR 2.60%</div><span class="kpi-badge badge-info">0.7% del gasto</span></div>
+</div>
+<div class="alert alert-good">✅ <strong>Por fin se prueba al público femenino — y responde.</strong> Tras meses señalando que las mujeres recibían entre el 11% y el 20% del presupuesto, en septiembre suben al <strong>32,2%</strong> y aportan <strong>234 leads</strong>. El coste por lead es algo peor que el masculino (€1,218 vs €0,991, un 23% más), así que el reparto actual — dos tercios hombres, un tercio mujeres — parece razonable: ya no es un hueco sin explorar, es una proporción con datos detrás.</div>
+<div class="subheading">5b · Por edad (campañas de leads)</div><div class="bar-section">
+<div class="bar-row"><div class="bar-label">18-24</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:linear-gradient(90deg,var(--accent),#7c3aed);">€49 · 5.6%</div></div></div>
+<div class="bar-row"><div class="bar-label">25-34</div><div class="bar-track"><div class="bar-fill" style="width:31%;background:linear-gradient(90deg,var(--accent),#7c3aed);">€76 · 8.6%</div></div></div>
+<div class="bar-row"><div class="bar-label">35-44</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:linear-gradient(90deg,var(--accent),#7c3aed);">€86 · 9.7%</div></div></div>
+<div class="bar-row"><div class="bar-label">45-54</div><div class="bar-track"><div class="bar-fill" style="width:79%;background:linear-gradient(90deg,var(--accent),#7c3aed);">€194 · 21.9%</div></div></div>
+<div class="bar-row"><div class="bar-label">55-64</div><div class="bar-track"><div class="bar-fill" style="width:97%;background:linear-gradient(90deg,var(--accent),#7c3aed);">€237 · 26.7%</div></div></div>
+<div class="bar-row"><div class="bar-label">65+</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--accent),#7c3aed);">€244 · 27.6%</div></div></div>
+</div><div class="table-wrap"><table><thead><tr><th>Tramo</th><th>Inversión</th><th>% gasto</th><th>Leads</th><th>CPL</th><th>CTR</th></tr></thead><tbody>
+<tr><td><strong>18-24</strong></td><td class="num">€49.35</td><td>5.6%</td><td class="num">44</td><td class="num num-down">€1.122</td><td class="num">1.07%</td></tr>
+<tr><td><strong>25-34</strong></td><td class="num">€76.36</td><td>8.6%</td><td class="num">76</td><td class="num num-up">€1.005</td><td class="num">1.58%</td></tr>
+<tr><td><strong>35-44</strong></td><td class="num">€85.80</td><td>9.7%</td><td class="num">101</td><td class="num num-up">€0.850</td><td class="num">1.86%</td></tr>
+<tr><td><strong>45-54</strong></td><td class="num">€193.89</td><td>21.9%</td><td class="num">195</td><td class="num num-up">€0.994</td><td class="num">1.63%</td></tr>
+<tr><td><strong>55-64</strong></td><td class="num">€236.68</td><td>26.7%</td><td class="num">220</td><td class="num num-down">€1.076</td><td class="num">1.87%</td></tr>
+<tr><td><strong>65+</strong></td><td class="num">€244.28</td><td>27.6%</td><td class="num">207</td><td class="num num-down">€1.180</td><td class="num">2.41%</td></tr>
+</tbody></table></div>
+<div class="insight"><strong>La audiencia de leads es mucho mayor que el comprador histórico de la cuenta.</strong> Los tramos de <strong>45 años en adelante concentran el 76,2% de la inversión y 622 de los 843 leads</strong>, con el <strong>65+ como primer tramo por gasto</strong> (27,6%) y el mejor CTR de la tabla (2,41%). Es un giro frente al perfil que veníamos viendo en las campañas de tienda (hombre 25-44). <br><br>Ahora bien, en <strong>coste por lead el mejor tramo es 35-44 (€0,850)</strong>, por delante de 45-54 (€0,994) y por debajo de 55-64 (€1,076) y 65+ (€1,180). Es decir: <strong>el algoritmo está metiendo más dinero en los tramos mayores, pero los leads más baratos salen del tramo 35-44</strong>, que solo recibe el 9,7%. <em>Dato importante para interpretarlo: no sabemos aún qué tramo compra</em> — un lead de 65+ y uno de 35-44 no tienen por qué valer lo mismo. Hasta cruzar los leads con las ventas en Klaviyo, es prematuro reasignar por CPL.</div>
+<div class="subheading">5c · Por ubicación (campañas de leads)</div><div class="table-wrap"><table><thead><tr><th>Ubicación</th><th>Inversión</th><th>Impresiones</th><th>Leads</th><th>CPL</th><th>CTR</th><th>CPM</th></tr></thead><tbody>
+<tr><td><strong>Feed</strong></td><td class="num">€270.36</td><td class="num">39,586</td><td class="num">203</td><td class="num num-down">€1.332</td><td class="num">2.32%</td><td class="num">€6.83</td></tr>
+<tr><td><strong>Instagram Stories</strong></td><td class="num">€135.29</td><td class="num">24,592</td><td class="num">78</td><td class="num num-down">€1.735</td><td class="num">1.72%</td><td class="num">€5.50</td></tr>
+<tr><td><strong>Anuncios en Facebook Reels</strong></td><td class="num">€114.96</td><td class="num">81,830</td><td class="num">52</td><td class="num num-down">€2.211</td><td class="num">0.68%</td><td class="num">€1.40</td></tr>
+<tr><td><strong>Facebook Reels</strong></td><td class="num">€88.65</td><td class="num">10,352</td><td class="num">44</td><td class="num num-down">€2.015</td><td class="num">1.90%</td><td class="num">€8.56</td></tr>
+<tr><td><strong>Instagram Reels</strong></td><td class="num">€77.45</td><td class="num">9,795</td><td class="num">65</td><td class="num num-down">€1.191</td><td class="num">2.74%</td><td class="num">€7.91</td></tr>
+<tr><td><strong>Facebook Stories</strong></td><td class="num">€33.66</td><td class="num">2,501</td><td class="num">25</td><td class="num num-down">€1.346</td><td class="num">4.84%</td><td class="num">€13.46</td></tr>
+</tbody></table></div>
+<div class="insight"><strong>Instagram Reels vuelve a ser el placement más eficiente y vuelve a estar infrafinanciado</strong> — es la cuarta vez consecutiva que aparece esta conclusión. Con <strong>€77,45 (9% del gasto de leads)</strong> consigue el <strong>mejor CPL (€1,191)</strong> y el mejor CTR de los formatos con volumen (2,74%). En el extremo opuesto, <strong>"Anuncios en Facebook Reels" se lleva €114,96 con el peor CPL (€2,211) y un CTR del 0,68%</strong>: mucho alcance barato (CPM €1,40) que no convierte. <strong>Feed es el que más volumen aporta</strong> (203 leads) a un CPL razonable. En el calentamiento, Instagram Stories concentra el 99% del gasto (€177,65) con un coste por visita de €0,0259. <strong>Acción clara: mover presupuesto de Facebook Reels a Instagram Reels.</strong></div></div>
+<div class="section" id="s6"><div class="section-number">06</div><h2 class="section-heading">Cambios, Frecuencia y Estado de la Cuenta</h2>
+<div class="subheading">6a · Cambios del mes</div>
+<div class="step-card urgent"><span class="step-priority">🔴 CAMBIO CLAVE</span><div class="step-title">Giro de estrategia: la cuenta pasa de venta directa a captación de leads</div><div class="step-desc">Tras varios meses en los que la venta directa no terminaba de ser rentable, septiembre reasigna <strong>el 74% del presupuesto (€886) a cuatro campañas de captación</strong>: sale privada, recomendador de palas, y dos campañas en inglés. Resultado: <strong>843 leads a €1,05</strong>. Las campañas históricas de tienda (TOFU, MOFU, MOFU Europa) bajan de €372,94 a €27,97 (−92,5%).</div></div>
+<div class="step-card urgent"><span class="step-priority">🔴 CRÍTICO</span><div class="step-title">La web nueva empieza a generar actividad de compra</div><div class="step-desc">Con la tienda nueva en marcha, el export de septiembre incorpora por primera vez <strong>valor de conversión de carrito (€114,70) y de checkout iniciado (€124,60)</strong>. Toda esa actividad procede de <strong>MOFU_NEWCOLLECTION</strong>, que con solo €63,32 y ocho días en el aire genera <strong>3 carritos y 1 checkout</strong>, además del checkout de la campaña de rebajas. Es poca muestra todavía, pero es la primera vez que la tienda devuelve datos de valor.</div></div>
+<div class="step-card important"><span class="step-priority">🟡 NOVEDAD</span><div class="step-title">Lanzamiento de la nueva colección (22/09) y campaña propia</div><div class="step-desc">Entra <strong>MOFU_NEWCOLLECTION</strong> con €63,32 en la parte final del mes, acompañando el lanzamiento de la nueva colección. Es la única campaña con eventos de tienda: <strong>3 carritos y 1 checkout iniciado</strong>. Con poco más de una semana de recorrido y €63 de inversión, los datos son todavía insuficientes para valorarla.</div></div>
+<div class="step-card important"><span class="step-priority">🟡 NOVEDAD</span><div class="step-title">Apertura del mercado inglés</div><div class="step-desc">Dos campañas nuevas en inglés — <strong>(inglés) lead recomendador</strong> (€72,79) y <strong>BNBL_LEAD_MERCADOINGLES</strong> (€60,99) — captan <strong>73 leads</strong> a un CPL de €1,83. Estados Unidos vuelve a la cuenta con €77,26, tras haberse cerrado en junio. El CTR estadounidense (3,63%) es incluso mejor que el español, aunque el CPM es muy alto.</div></div>
+<div class="step-card important"><span class="step-priority">🟡 IMPORTANTE</span><div class="step-title">Test A/B de 21 creatividades en la sale privada</div><div class="step-desc">La campaña de sale privada se lanzó con una batería amplia de variantes (v1 a v12 de <strong>EXCLUSIVIDAD_STAT</strong>). Meta concentró el gasto en unas pocas: v1 (€208,78) y v7 (€154,85) se llevan el 61% del presupuesto de la campaña. La familia <strong>RBJV_STAT</strong> (21 variantes) apenas recibió unos pocos euros cada una, por lo que no tiene lectura.</div></div>
+<div class="step-card improve"><span class="step-priority">🟣 AJUSTE</span><div class="step-title">El calentamiento pierde eficiencia por primera vez en meses</div><div class="step-desc">Con el mismo presupuesto (€178,83 vs €184,24), el calentamiento <strong>pierde un 33% de impresiones y un 29% de visitas al perfil</strong>, y su coste por visita sube un 38% (€0,0189 → €0,0260). Mejora en cambio el CTR (6,40%) y la frecuencia (1,36×). <em>Hipótesis a verificar: competencia por inventario con el resto de campañas del mes, que han multiplicado el gasto total.</em></div></div>
+<div class="subheading">6b · Frecuencia y saturación</div><div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-label">Calentamiento (Perfil)</div><div class="kpi-value">1.36×</div><div class="kpi-sub">Alcance: 80.258 personas</div><span class="kpi-badge badge-good">✓ Zona óptima</span></div>
+<div class="kpi-card"><div class="kpi-label">Sale privada (leads)</div><div class="kpi-value">1.60×</div><div class="kpi-sub">Alcance: 100.844 personas</div><span class="kpi-badge badge-good">✓ Sana</span></div>
+<div class="kpi-card"><div class="kpi-label">MOFU Nueva Colección</div><div class="kpi-value">2.84×</div><div class="kpi-sub">Alcance: 3.534 personas</div><span class="kpi-badge badge-warn">⚠ Alta para 8 días</span></div>
+<div class="kpi-card"><div class="kpi-label">Recomendador (leads)</div><div class="kpi-value">2.21×</div><div class="kpi-sub">Alcance: 21.713 personas</div><span class="kpi-badge badge-warn">⚠ Vigilar</span></div>
+</div>
+<div class="alert alert-good">✅ <strong>La frecuencia deja de ser un problema.</strong> Es la primera vez en varios meses que ninguna campaña supera el umbral de saturación: la peor es <strong>MOFU Nueva Colección con 2,84×</strong>, y además sobre solo ocho días de actividad y una audiencia pequeña (3.534 personas), lo que conviene vigilar si se escala. Las campañas de leads trabajan sobre audiencias amplias y frías (100.844 personas en la sale privada), lo que explica la mejora. El <strong>círculo vicioso del retargeting que señalamos en agosto</strong> — audiencias cálidas pequeñas que se quemaban — queda en pausa al haberse apagado prácticamente las campañas MOFU antiguas.</div>
+<div class="subheading">6c · Estado de las campañas (constancia)</div>
+<p style="color:var(--muted);margin-bottom:18px;max-width:820px;">Registro de todas las campañas con gasto y su estado al exportar. <strong style="color:var(--text)">El gasto de las pausadas está incluido en los totales del reporte.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Campaña</th><th>Bloque</th><th>Inversión</th><th>Resultado</th><th>Estado al exportar</th></tr></thead><tbody>
+<tr><td><strong>BNBL_LEAD_LEAD_RBJP_0926</strong></td><td style="font-size:12px;color:var(--muted);">Leads · sale privada</td><td class="num">€595,04</td><td>400 leads · CPL €1,488</td><td style="color:var(--muted);font-size:12px;">Sin entrega</td></tr>
+<tr><td><strong>INTERACCIÓN PERFIL · Calentamiento</strong></td><td style="font-size:12px;color:var(--muted);">Perfil</td><td class="num">€178,83</td><td>6.883 visitas al perfil</td><td style="color:var(--muted);font-size:12px;"><strong style="color:var(--good)">Activa</strong></td></tr>
+<tr><td><strong>BNBL_LEAD_RECOMENDADOR</strong></td><td style="font-size:12px;color:var(--muted);">Leads · recomendador</td><td class="num">€157,54</td><td>370 leads · CPL €0,426</td><td style="color:var(--muted);font-size:12px;"><strong style="color:var(--good)">Activa</strong></td></tr>
+<tr><td><strong>(inglés) lead recomendador</strong></td><td style="font-size:12px;color:var(--muted);">Leads · inglés</td><td class="num">€72,79</td><td>38 leads · CPL €1,916</td><td style="color:var(--muted);font-size:12px;"><strong style="color:var(--good)">Activa</strong></td></tr>
+<tr><td><strong>MOFU_NEWCOLLECTION</strong></td><td style="font-size:12px;color:var(--muted);">Tienda · nueva colección</td><td class="num">€63,32</td><td>3 carritos · 1 checkout</td><td style="color:var(--muted);font-size:12px;"><strong style="color:var(--good)">Activa</strong></td></tr>
+<tr><td><strong>BNBL_LEAD_MERCADOINGLES</strong></td><td style="font-size:12px;color:var(--muted);">Leads · inglés</td><td class="num">€60,99</td><td>35 leads · CPL €1,743</td><td style="color:var(--muted);font-size:12px;">Sin entrega</td></tr>
+<tr><td><strong>BNBL_LEAD_LEAD_RBJV_ES_0926 -2</strong></td><td style="font-size:12px;color:var(--muted);">Tienda · rebajas (a web)</td><td class="num">€43,75</td><td>1 checkout · 0 leads en Meta</td><td style="color:var(--muted);font-size:12px;"><strong style="color:var(--good)">Activa</strong></td></tr>
+<tr><td><strong>TOFU</strong></td><td style="font-size:12px;color:var(--muted);">Tienda · antigua</td><td class="num">€17,95</td><td>Sin eventos</td><td style="color:var(--muted);font-size:12px;">Sin entrega</td></tr>
+<tr><td><strong>MOFU EUROPA</strong></td><td style="font-size:12px;color:var(--muted);">Tienda · antigua</td><td class="num">€6,44</td><td>Sin eventos</td><td style="color:var(--muted);font-size:12px;">Sin entrega</td></tr>
+<tr><td><strong>MOFU</strong></td><td style="font-size:12px;color:var(--muted);">Tienda · antigua</td><td class="num">€3,58</td><td>Sin eventos</td><td style="color:var(--muted);font-size:12px;">Sin entrega</td></tr>
+<tr><td><strong>RECONOCIMIENTO FERIA PADDEL</strong></td><td style="font-size:12px;color:var(--muted);">—</td><td class="num">€0,00</td><td>—</td><td style="color:var(--muted);font-size:12px;">Pausada desde mayo</td></tr>
+</tbody></table></div>
+<div class="alert alert-warn">⚠️ <strong>Aviso sobre los datos de este mes:</strong> el export de septiembre <strong>no incluye tres columnas que veníamos usando</strong>, lo que rompe parte de la continuidad del reporte:<br><br>• <strong>Visitas a la página de destino</strong> — sin ella no se puede calcular el coste por visita a la web ni la tasa clic → visita, que veníamos siguiendo desde junio.<br>• <strong>ThruPlays</strong> — el Hold Rate del vídeo no es comparable con meses anteriores; se usa el porcentaje de reproducciones al 95% como alternativa.<br>• <strong>Desglose por día</strong> — el cuarto archivo exportado viene sin desglose temporal, así que no se puede reconstruir la cronología exacta de lanzamientos y pausas del mes.<br><br>Para el reporte de octubre conviene <strong>volver a exportar con las mismas columnas y desgloses de siempre</strong> (edad+sexo, día, ubicación y país) para no perder la serie histórica.</div></div>
+<div class="section" id="s7"><div class="section-number">07</div><h2 class="section-heading">Creatividades & Métricas de Vídeo</h2>
+<div class="subheading">7a · Creatividades de leads · las que mandan este mes</div>
+<div class="table-wrap"><table><thead><tr><th>Anuncio</th><th>Campaña</th><th>Inversión</th><th>Leads</th><th>CPL</th><th>CTR</th></tr></thead><tbody>
+<tr style="background:rgba(52,211,153,0.07)"><td><strong>v1 (recomendador) 🏆</strong></td><td style="font-size:12px;color:var(--muted);">Recomendador</td><td class="num">€110.42</td><td class="num">275</td><td class="num num-up">€0.402</td><td class="num">3.08%</td></tr>
+<tr style="background:rgba(52,211,153,0.07)"><td><strong>v4 (recomendador)</strong></td><td style="font-size:12px;color:var(--muted);">Recomendador</td><td class="num">€6.26</td><td class="num">17</td><td class="num num-up">€0.368</td><td class="num">3.30%</td></tr>
+<tr style="background:rgba(52,211,153,0.07)"><td><strong>v8 (recomendador)</strong></td><td style="font-size:12px;color:var(--muted);">Recomendador</td><td class="num">€9.77</td><td class="num">20</td><td class="num num-up">€0.488</td><td class="num">2.81%</td></tr>
+<tr style="background:rgba(52,211,153,0.07)"><td><strong>v5 (recomendador)</strong></td><td style="font-size:12px;color:var(--muted);">Recomendador</td><td class="num">€21.16</td><td class="num">40</td><td class="num num-up">€0.529</td><td class="num">3.20%</td></tr>
+<tr><td><strong>v7_BNBL_0926_LEAD_RBJP_EXCLUSIVIDAD</strong></td><td style="font-size:12px;color:var(--muted);">Sale privada</td><td class="num">€154.85</td><td class="num">133</td><td class="num num-down">€1.164</td><td class="num">2.97%</td></tr>
+<tr><td><strong>v12_BNBL_0926_LEAD_RBJP_EXCLUSIVIDAD</strong></td><td style="font-size:12px;color:var(--muted);">Sale privada</td><td class="num">€90.49</td><td class="num">78</td><td class="num num-down">€1.160</td><td class="num">1.60%</td></tr>
+<tr style="background:rgba(239,68,68,0.05)"><td><strong>v1_BNBL_0926_LEAD_RBJP_EXCLUSIVIDAD</strong></td><td style="font-size:12px;color:var(--muted);">Sale privada</td><td class="num">€208.78</td><td class="num">109</td><td class="num num-down">€1.915</td><td class="num">0.88%</td></tr>
+<tr style="background:rgba(239,68,68,0.05)"><td><strong>v5_BNBL_0926_LEAD_RBJP_EXCLUSIVIDAD</strong></td><td style="font-size:12px;color:var(--muted);">Sale privada</td><td class="num">€36.64</td><td class="num">18</td><td class="num num-down">€2.036</td><td class="num">1.01%</td></tr>
+<tr><td><strong>7 (inglés)</strong></td><td style="font-size:12px;color:var(--muted);">Recomendador inglés</td><td class="num">€55.81</td><td class="num">28</td><td class="num num-down">€1.993</td><td class="num">4.06%</td></tr>
+<tr><td><strong>ad1ingles 9</strong></td><td style="font-size:12px;color:var(--muted);">Mercado inglés</td><td class="num">€36.60</td><td class="num">24</td><td class="num num-down">€1.525</td><td class="num">2.96%</td></tr>
+</tbody></table></div>
+<div class="alert alert-good">💡 <strong>El anuncio del mes es "v1" del recomendador:</strong> <strong>275 leads por €110,42</strong>, un CPL de <strong>€0,402</strong> — casi la tercera parte del coste medio de la cuenta — y el mejor CTR con volumen (3,08%). Todas las variantes del recomendador rinden por debajo de €0,53 por lead. <br><br>En la sale privada, la lectura es distinta: <strong>v1 recibió el mayor presupuesto de toda la cuenta (€208,78) y es de los peores en coste (€1,915) y CTR (0,88%)</strong>, mientras <strong>v7 y v12 captaban leads un 40% más baratos</strong> (€1,16). Hay margen inmediato: redistribuir el gasto de v1 hacia v7/v12 habría abaratado los leads de esa campaña sin tocar nada más.</div>
+<div class="subheading">7b · Calentamiento · vídeo</div><div class="ad-cards">
+<div class="ad-card"><div class="ad-rank-badge"><span class="ad-rank rank-top">🏆 TOP 1</span></div><div class="ad-card-title">"Reels 20 Mayo Gripping"</div><div class="ad-metrics">
+<div class="ad-metric"><div class="ad-metric-val">€149,91</div><div class="ad-metric-lbl">Inversión</div></div>
+<div class="ad-metric"><div class="ad-metric-val">5.913</div><div class="ad-metric-lbl">Visitas perfil</div></div>
+<div class="ad-metric"><div class="ad-metric-val">€0,0254</div><div class="ad-metric-lbl">Coste/Visita</div></div>
+<div class="ad-metric"><div class="ad-metric-val">6,26%</div><div class="ad-metric-lbl">CTR</div></div>
+</div><div class="persona-desc" style="margin-top:12px;">Sigue sosteniendo el calentamiento con el 84% del presupuesto. Lleva <strong>cuatro meses</strong> como creativo principal de la cuenta.</div></div>
+<div class="ad-card"><div class="ad-rank-badge"><span class="ad-rank rank-mid">TOP 2</span></div><div class="ad-card-title">"During this process… resin"</div><div class="ad-metrics">
+<div class="ad-metric"><div class="ad-metric-val">€27,02</div><div class="ad-metric-lbl">Inversión</div></div>
+<div class="ad-metric"><div class="ad-metric-val">917</div><div class="ad-metric-lbl">Visitas perfil</div></div>
+<div class="ad-metric"><div class="ad-metric-val">€0,0295</div><div class="ad-metric-lbl">Coste/Visita</div></div>
+<div class="ad-metric"><div class="ad-metric-val">7,55%</div><div class="ad-metric-lbl">CTR</div></div>
+</div><div class="persona-desc" style="margin-top:12px;">El <strong>mejor CTR del mes</strong> (7,55%) con una inversión modesta. Recupera algo de peso tras meses relegado.</div></div>
+<div class="ad-card"><div class="ad-rank-badge"><span class="ad-rank rank-mid">TOP 3</span></div><div class="ad-card-title">"Reel 6 Junio"</div><div class="ad-metrics">
+<div class="ad-metric"><div class="ad-metric-val">€1,63</div><div class="ad-metric-lbl">Inversión</div></div>
+<div class="ad-metric"><div class="ad-metric-val">50</div><div class="ad-metric-lbl">Visitas perfil</div></div>
+<div class="ad-metric"><div class="ad-metric-val">€0,0326</div><div class="ad-metric-lbl">Coste/Visita</div></div>
+<div class="ad-metric"><div class="ad-metric-val">5,84%</div><div class="ad-metric-lbl">CTR</div></div>
+</div><div class="persona-desc" style="margin-top:12px;">Señalado el mes pasado como candidato a recibir presupuesto; sigue con €1,63. <strong>La recomendación no se ha aplicado.</strong></div></div>
+</div>
+<div class="subheading">7c · Funnel de retención de vídeo (calentamiento)</div><div class="video-funnel"><div class="funnel-title">Retención agregada de los creativos de calentamiento</div>
+<div class="funnel-row"><div class="funnel-label">Impresiones</div><div class="funnel-bar"><div class="funnel-fill" style="width:100%;background:var(--accent);">108,894</div></div><div class="funnel-pct">100.0%</div></div>
+<div class="funnel-row"><div class="funnel-label">Vídeo 3s+</div><div class="funnel-bar"><div class="funnel-fill" style="width:30%;background:#22d3ee;">32,623</div></div><div class="funnel-pct">30.0%</div></div>
+<div class="funnel-row"><div class="funnel-label">25%</div><div class="funnel-bar"><div class="funnel-fill" style="width:17%;background:#7c3aed;">18,713</div></div><div class="funnel-pct">17.2%</div></div>
+<div class="funnel-row"><div class="funnel-label">50%</div><div class="funnel-bar"><div class="funnel-fill" style="width:12%;background:var(--accent2);">13,203</div></div><div class="funnel-pct">12.1%</div></div>
+<div class="funnel-row"><div class="funnel-label">95%</div><div class="funnel-bar"><div class="funnel-fill" style="width:7%;background:#a78bfa;">7,709</div></div><div class="funnel-pct">7.1%</div></div>
+<div class="funnel-row"><div class="funnel-label">100%</div><div class="funnel-bar"><div class="funnel-fill" style="width:6%;background:#c4b5fd;">6,621</div></div><div class="funnel-pct">6.1%</div></div>
+<div class="funnel-row"><div class="funnel-label">Clics</div><div class="funnel-bar"><div class="funnel-fill" style="width:6%;background:var(--good);">6,965</div></div><div class="funnel-pct">6.4%</div></div>
+</div><div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-label">Hook Rate (3s/Imp)</div><div class="kpi-value">30,0%</div><div class="kpi-sub">% que pasa de 3 segundos</div><span class="kpi-badge badge-good">▲ vs 27,7% agosto</span></div>
+<div class="kpi-card"><div class="kpi-label">Retención al 95% (sobre 3s)</div><div class="kpi-value">23,6%</div><div class="kpi-sub">Alternativa al Hold Rate · sin ThruPlays este mes</div><span class="kpi-badge badge-warn">⚠ No comparable</span></div>
+</div>
+<div class="insight">El <strong>Hook Rate mejora al 30,0%</strong> (desde el 27,7% de agosto), rompiendo la erosión de los últimos meses. La retención profunda es sólida: un <strong>6,1% de las impresiones llega al 100% del vídeo</strong>. <strong>Importante:</strong> este mes el export no incluye ThruPlays, así que el Hold Rate que veniámos siguiendo (48,3% en agosto) <strong>no se puede calcular ni comparar</strong>; en su lugar se muestra la retención al 95%. Conviene recuperar esa columna en el próximo export.</div></div>
+<div class="section" id="s8"><div class="section-number">08</div><h2 class="section-heading">Embudo de Conversión & Next Steps</h2>
+<div class="subheading">8a · El embudo este mes</div>
+<p style="color:var(--muted);margin-bottom:18px;max-width:820px;">Septiembre tiene <strong style="color:var(--text)">dos embudos distintos</strong> porque la cuenta persigue dos objetivos. El de leads es el que concentra la inversión; el de tienda tiene tan poco volumen y tan poco presupuesto que solo ofrece señales sueltas. <em>Nota: la tasa clic → visita a la web que señalamos en julio y agosto no se puede calcular este mes porque el export no incluye la columna de visitas a la página de destino.</em></p>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-label">Embudo LEADS · Clic → Lead</div><div class="kpi-value">21,3%</div><div class="kpi-sub">3.950 clics → 843 leads</div><span class="kpi-badge badge-good">✓ Tasa sana</span></div>
+<div class="kpi-card"><div class="kpi-label">Embudo LEADS · CPL medio</div><div class="kpi-value">€1,05</div><div class="kpi-sub">€886,36 · 843 leads</div><span class="kpi-badge badge-good">✓ Barato</span></div>
+<div class="kpi-card"><div class="kpi-label">Embudo TIENDA · Carrito → Checkout</div><div class="kpi-value">66,7%</div><div class="kpi-sub">3 carritos → 2 checkouts</div><span class="kpi-badge badge-warn">⚠ Muestra mínima</span></div>
+<div class="kpi-card"><div class="kpi-label">Embudo TIENDA · Valor en checkout</div><div class="kpi-value">€124,60</div><div class="kpi-sub">2 checkouts iniciados · €62,30 de media</div><span class="kpi-badge badge-info">Muestra mínima</span></div>
+</div>
+<div class="alert alert-warn">⚠️ <strong>Dónde estamos realmente.</strong> El embudo de leads funciona: <strong>algo más de 1 de cada 5 clics se convierte en lead</strong> y el coste medio es de €1,05. El de tienda, en cambio, apenas tiene recorrido: con <strong>€135 de inversión total</strong> se generan 3 carritos y 2 checkouts iniciados, muy poco volumen para concluir nada sobre la web nueva. <br><br>Lo relevante es que ahora el embudo tiene un tramo nuevo fuera de Meta: <strong>843 leads que deben convertirse en ventas a través del flujo de email</strong>. Ese tramo ocurre fuera de Meta: <strong>hasta cruzar los leads con Klaviyo y con las ventas reales de la tienda no sabremos si el CPL de €1,05 es un buen negocio o no</strong>.</div>
+<div class="subheading">8b · Acciones priorizadas para octubre</div>
+
+<div class="step-card urgent"><span class="step-priority">🔴 URGENTE</span><div class="step-title">Medir qué hacen los 843 leads — es lo que decide si el mes fue bueno</div><div class="step-desc">La estrategia del mes solo se puede juzgar por lo que ocurra después del lead. (a) <strong>Cruzar los leads con Klaviyo</strong>: cuántos abren, cuántos compran y en cuánto tiempo; (b) calcular el <strong>valor real por lead</strong> para saber si €1,05 es barato o caro; (c) comprobar si el lead del <strong>recomendador</strong> (€0,43) convierte igual que el de la <strong>sale privada</strong> (€1,49) — si convierte igual, la decisión de reparto es inmediata; (d) revisar qué pasa con los leads por tramo de edad, dado que el 76% del gasto fue a mayores de 45.</div></div>
+<div class="step-card urgent"><span class="step-priority">🔴 URGENTE</span><div class="step-title">Reasignar presupuesto hacia el recomendador</div><div class="step-desc">Es la acción con mayor impacto inmediato y no depende de nadie externo. El <strong>recomendador capta a €0,426 y la sale privada a €1,488</strong> — 3,5 veces más. (a) <strong>Subir el presupuesto del recomendador</strong>, que solo recibió €157 frente a los €595 de la sale privada, vigilando que el CPL no se dispare al escalar; (b) dentro de la sale privada, <strong>mover el gasto de v1 (€208,78 a €1,915/lead) hacia v7 y v12</strong> (€1,16/lead); (c) revisar si la sale privada tenía un objetivo distinto (urgencia, lista caliente) que justifique su CPL — si no, recortarla.</div></div>
+<div class="step-card important"><span class="step-priority">🟡 IMPORTANTE</span><div class="step-title">Dar presupuesto real a la nueva colección</div><div class="step-desc">La nueva colección se lanzó el 22/09 y la campaña solo recibió <strong>€63,32 en ocho días</strong>, aunque fue la única que generó eventos de tienda (3 carritos, 1 checkout). (a) <strong>Asignarle presupuesto suficiente en octubre</strong> para poder evaluarla; (b) vigilar la <strong>frecuencia (2,84× sobre 3.534 personas)</strong>, que ya es alta y empeorará al escalar si no se amplía la audiencia; (c) usar los <strong>843 leads nuevos como audiencia cálida</strong> — es justo lo que le faltaba al MOFU.</div></div>
+<div class="step-card important"><span class="step-priority">🟡 IMPORTANTE</span><div class="step-title">Mover presupuesto de Facebook Reels a Instagram Reels</div><div class="step-desc">Cuarta vez consecutiva que aparece esta recomendación. <strong>Instagram Reels tiene el mejor CPL (€1,191) con solo el 9% del gasto</strong>, mientras <strong>"Anuncios en Facebook Reels" se lleva €114,96 con el peor CPL (€2,211) y un CTR del 0,68%</strong>. (a) Recortar el segundo y trasladar ese presupuesto al primero; (b) mantener Feed, que aporta el mayor volumen de leads a coste razonable.</div></div>
+<div class="step-card improve"><span class="step-priority">🟣 MEJORA</span><div class="step-title">Recuperar las columnas y desgloses del export</div><div class="step-desc">El export de septiembre perdió <strong>visitas a la página de destino, ThruPlays y el desglose por día</strong>, lo que impide calcular métricas que veníamos siguiendo y reconstruir la cronología del mes. (a) <strong>Volver a exportar con las columnas y los cuatro desgloses de siempre</strong> (edad+sexo, día, ubicación, país) para no perder la serie histórica; (b) decidir si el mercado inglés se concentra en 2-3 países en lugar de repartirse entre 43.</div></div>
+</div>
+<div class="section" id="s9"><div class="section-number">09</div><h2 class="section-heading">Conclusiones del Mes</h2><div class="conclusion">
+<p><strong style="color:var(--accent)">¿Qué ha funcionado?</strong> El <strong>cambio de estrategia</strong>. Tras varios meses en los que la venta directa no terminaba de ser rentable, septiembre reasigna el <strong>74% del presupuesto a captación</strong> y consigue <strong>843 leads a €1,05</strong>. Dentro de ese bloque destaca el <strong>recomendador de palas: €0,426 por lead</strong>, 3,5 veces más barato que la sale privada, con el anuncio "v1" captando 275 leads a €0,402. Se abre además el <strong>mercado inglés</strong> (73 leads), el <strong>público femenino sube al 32% del gasto</strong> con buen rendimiento, el <strong>Hook Rate del vídeo mejora al 30,0%</strong> y por primera vez en meses <strong>ninguna campaña satura su audiencia</strong>.</p>
+<p><strong style="color:var(--accent)">¿Qué no ha funcionado?</strong> El <strong>calentamiento pierde un 38% de eficiencia</strong>: con el mismo presupuesto que en agosto, el coste por visita al perfil sube de €0,0189 a €0,0260 y pierde un tercio de las impresiones. El <strong>CPM global sube un 74%</strong> (€1,95 → €3,40) al entrar Facebook y los formatos de leads en el mix. Dentro de la sale privada, el anuncio con más presupuesto de toda la cuenta — <strong>v1, con €208,78</strong> — fue de los <strong>peores en coste por lead</strong> (€1,915) y en CTR (0,88%), mientras v7 y v12 captaban un 40% más barato. Y la <strong>tienda se quedó con solo €135 (11% del presupuesto)</strong>: con la nueva colección recién lanzada, es muy poco para saber si convierte.</p>
+<p><strong style="color:var(--accent)">¿Qué hemos aprendido?</strong> Que <strong>la cuenta sabe captar barato</strong> — el recomendador lleva demostrándolo desde julio y este mes lo confirma a escala. También que el <strong>público que responde a los leads es mucho mayor que el comprador histórico</strong>: los mayores de 45 concentran el 76% del gasto y 622 de los 843 leads, cuando las campañas de tienda siempre apuntaron a 25-44. Es un hallazgo importante, pero <strong>todavía no sabemos qué tramo compra</strong>, así que no debe darse por bueno sin cruzarlo. Y una lección operativa: con <strong>€135 en tienda</strong> y la nueva colección recién lanzada, no hay dinero suficiente para saber si la web nueva convierte.</p>
+<p><strong style="color:var(--accent)">¿Qué acciones tomaremos en octubre?</strong> Cinco focos, por orden: <strong>(1)</strong> <strong>medir qué hacen los 843 leads</strong> cruzándolos con Klaviyo y con las ventas reales; <strong>(2)</strong> <strong>reasignar presupuesto hacia el recomendador</strong> y, dentro de la sale privada, de v1 hacia v7/v12; <strong>(3)</strong> <strong>dar presupuesto real a la nueva colección</strong>, usando los leads nuevos como audiencia cálida; <strong>(4)</strong> <strong>mover gasto de Facebook Reels a Instagram Reels</strong>; <strong>(5)</strong> <strong>recuperar las columnas y desgloses del export</strong>.</p>
+<p><strong style="color:var(--accent)">¿Qué esperamos mejorar y cómo lo mediremos?</strong> Octubre debería ser el mes en que <strong>se cierre el círculo</strong>: con la web nueva funcionando, los leads captados y el calendario de Q4 por delante (activación B2B y Mid Season Sale), la cuenta tiene por fin todas las piezas sobre la mesa. Los indicadores a seguir: la <strong>conversión de los 843 leads en ventas</strong>, que es la medida real del éxito del mes; el <strong>CPL por campaña</strong> (hoy €0,43 el recomendador frente a €1,49 la sale privada); la <strong>conversión lead → venta</strong>, hoy desconocida; el <strong>rendimiento de la nueva colección</strong> con presupuesto suficiente; y el <strong>coste por visita al perfil</strong> (hoy €0,0260, objetivo volver a €0,019).</p>
+</div></div>
+<div class="footer">
+  <div class="footer-brand">Navy Marketing</div>
+  <div class="footer-text">Reporte de rendimiento Meta Ads · Bonabola · <strong>Septiembre 2026</strong></div>
+  <div class="footer-contact">Carlos (Meta Ads) &amp; Nuria (Email Marketing)<br>carlos@navymarketing.es · nuria@navymarketing.es · 681 24 33 55</div>
+</div>
+</body></html>
